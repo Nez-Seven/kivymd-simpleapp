@@ -1,0 +1,106 @@
+
+
+<ContentNavigationDrawer>:
+    MDBoxLayout:
+        orientation:'vertical'
+        padding:'8dp'
+        Image:
+            source:'appicon.png'
+            padding:'5dp'
+            spacing:'5dp'
+            pos_hint:{'x':0.1,'y':0.8}
+            size_hint:0.8,0.8
+        ScrollView:
+            MDList:
+                OneLineAvatarIconListItem:
+                    text: "     HOME"
+                    on_release:
+                        root.nav_drawer.set_state("close")
+                        root.screen_manager.current = "scr 1"
+                    IconLeftWidget:
+                        icon:"home"
+                OneLineAvatarIconListItem:
+                    text: "     ABOUT"
+                    on_release:
+                        root.nav_drawer.set_state("close")
+                        root.screen_manager.current = "scr 2"
+                    IconLeftWidget:
+                        icon:"face-woman"
+                OneLineAvatarIconListItem:
+                    text: "     EXIT"
+                    on_release: app.stop()   
+                    IconLeftWidget:
+                        icon:"exit-to-app"
+<MyGrid>
+    text1:text1
+    text2:text2
+    MDScreen:
+        MDToolbar:
+            id: toolbar
+            pos_hint: {"top": 1}
+            elevation: 20
+            title: "HELL CALCULATOR"
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+        MDNavigationLayout:   
+            ScreenManager:
+                id: screen_manager
+                MDScreen:
+                    id:screen1
+                    name: "scr 1"
+                    MDFloatLayout:
+                        height:root.height-toolbar.height
+                        pos_hint: {'x':0.1,'y':0.1}
+                        size_hint: 0.8,0.8
+                        MDFloatLayout:
+                            pos_hint: {'x':0.1,'y':0.1}
+                            size_hint: 0.8,0.8       
+                            MDLabel:
+
+                                text: "ENTER NUMBER OF GOOD DEEDS :"
+                                pos_hint: {'x':0.1,'y':0.63}
+                                size_hint: 0.8,0.1
+                                color:1,0,0,1
+                                font_style: 'Caption'
+                            MDTextField:
+                                id: text1
+                                mode:"rectangle"
+                                hint_text: " Enter :"
+                                multiline: False
+                                input_filter: 'float'
+                                icon_right_color: app.theme_cls.primary_color
+                                pos_hint: {'x':0.1,'y':0.5}
+                                size_hint: 0.8,0.14
+                                font_style:'Caption'
+                            MDLabel:
+                                text: "ENTER NUMBER OF BAD DEEDS :"
+                                pos_hint: {'x':0.1,'y':0.38}
+                                size_hint: 0.8,0.1
+                                color:1,0,0,1
+                                font_style:'Caption'
+                            MDTextField:
+                                id: text2
+                                mode:"rectangle"
+                                hint_text: " Enter :"
+                                input_filter: 'float'
+                                multiline: False
+                                icon_right_color: app.theme_cls.primary_color
+                                pos_hint: {'x':0.1,'y':0.25}
+                                size_hint: 0.8,0.14
+                                font_style:'Caption'
+                            MDFlatButton:
+                                text:"< SUBMIT >"
+                                pos_hint:{'x':0.1,'y':0.1}
+                                size_hint:0.8,0.1
+                                text_color:1,0,0,1
+                                on_press:root.btn1()
+                MDScreen:
+                    name: "scr 2"
+                    MDLabel:
+                        text: "Screen 2"
+                        halign: "center"
+
+            MDNavigationDrawer:
+                id: nav_drawer
+                ContentNavigationDrawer:
+                    screen_manager: screen_manager
+                    nav_drawer: nav_drawer
